@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect, type ReactNode } from "react";
 
+let tooltipIdCounter = 0;
+
 interface TooltipProps {
   children: ReactNode;
   content: string;
@@ -15,7 +17,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const timeoutRef = useRef<number | null>(null);
-  const tooltipId = useRef(`tooltip-${Math.random().toString(36).substr(2, 9)}`);
+  const tooltipId = useRef(`tooltip-${++tooltipIdCounter}`);
 
   const showTooltip = () => {
     timeoutRef.current = window.setTimeout(() => {

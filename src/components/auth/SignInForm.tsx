@@ -48,54 +48,70 @@ export default function SignInForm() {
           <form onSubmit={handleSubmit}>
             <div className="space-y-6">
               <div>
-                <Label>
+                <Label htmlFor="email">
                   Email <span className="text-error-500">*</span>{" "}
                 </Label>
-                <Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="info@gmail.com" />
+                <Input 
+                  id="email"
+                  type="email"
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)} 
+                  placeholder="info@gmail.com"
+                  required
+                  aria-required="true"
+                />
               </div>
               <div>
-                <Label>
+                <Label htmlFor="password">
                   Password <span className="text-error-500">*</span>{" "}
                 </Label>
                 <div className="relative">
                   <Input
+                    id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
+                    aria-required="true"
                   />
-                  <span
+                  <button
+                    type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+                    className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2 focus:outline-none focus:ring-2 focus:ring-brand-500 rounded"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? (
                       <EyeIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
                     ) : (
                       <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
                     )}
-                  </span>
+                  </button>
                 </div>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Checkbox checked={isChecked} onChange={setIsChecked} />
-                  <span className="block font-normal text-gray-700 text-theme-sm dark:text-gray-400">
-                    Keep me logged in
-                  </span>
+                  <Checkbox 
+                    id="keep-logged-in"
+                    checked={isChecked} 
+                    onChange={setIsChecked}
+                    label="Keep me logged in"
+                  />
                 </div>
-                <Link to="/reset-password" className="text-sm text-brand-500 hover:text-brand-600 dark:text-brand-400">
+                <Link to="/reset-password" className="text-sm text-brand-500 hover:text-brand-600 dark:text-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500 rounded">
                   Forgot password?
                 </Link>
               </div>
               <div>
                 <button
-                  className="w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600 disabled:opacity-60"
+                  className="w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600 disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
                   type="submit"
                   disabled={loading}
+                  aria-busy={loading}
                 >
                   {loading ? "Signing in..." : "Sign in"}
                 </button>
-                {error && <p className="mt-2 text-sm text-error-500">{error}</p>}
+                {error && <p className="mt-2 text-sm text-error-500" role="alert">{error}</p>}
               </div>
             </div>
           </form>

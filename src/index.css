@@ -19,6 +19,37 @@ layer(base);
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
 
+  /* Typography Scale - Display */
+  --text-display-lg: 48px;
+  --text-display-lg--line-height: 60px;
+  --text-display-md: 36px;
+  --text-display-md--line-height: 44px;
+  --text-display-sm: 30px;
+  --text-display-sm--line-height: 38px;
+
+  /* Typography Scale - Headings */
+  --text-heading-lg: 24px;
+  --text-heading-lg--line-height: 32px;
+  --text-heading-md: 20px;
+  --text-heading-md--line-height: 28px;
+  --text-heading-sm: 18px;
+  --text-heading-sm--line-height: 24px;
+
+  /* Typography Scale - Body */
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+
+  /* Typography Scale - Caption/Labels */
+  --text-caption: 12px;
+  --text-caption--line-height: 18px;
+  --text-overline: 10px;
+  --text-overline--line-height: 16px;
+
+  /* Legacy typography tokens (for backward compatibility) */
   --text-title-2xl: 72px;
   --text-title-2xl--line-height: 90px;
   --text-title-xl: 60px;
@@ -35,6 +66,18 @@ layer(base);
   --text-theme-sm--line-height: 20px;
   --text-theme-xs: 12px;
   --text-theme-xs--line-height: 18px;
+
+  /* Spacing Scale Documentation:
+   * 4px  (1)  - Tight spacing, icons
+   * 8px  (2)  - Small gaps
+   * 12px (3)  - Compact spacing
+   * 16px (4)  - Standard spacing
+   * 20px (5)  - Medium spacing
+   * 24px (6)  - Large spacing
+   * 32px (8)  - Section spacing
+   * 40px (10) - Card padding
+   * 48px (12) - Large section gaps
+   */
 
   --color-current: currentColor;
   --color-transparent: transparent;

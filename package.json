@@ -3,6 +3,22 @@
   "private": true,
   "version": "2.0.2",
   "type": "module",
+  "description": "AI-powered legal contract analysis application with multi-tenant architecture",
+  "author": "haydonbawden",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haydonbawden/free-react-tailwind-admin-dashboard.git"
+  },
+  "keywords": [
+    "contract-analysis",
+    "ai",
+    "legal-tech",
+    "react",
+    "typescript",
+    "tailwind",
+    "supabase",
+    "openai"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

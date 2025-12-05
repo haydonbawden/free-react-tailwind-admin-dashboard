@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Clause } from "../../data/mockContracts";
+import type { PdfjsLib, WindowWithPdfjsLib } from "../../types/pdfjs";
 
 interface Props {
   fileUrl?: string;
@@ -12,44 +13,6 @@ export default function PdfViewer({ fileUrl, overlays = [] }: Props) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    interface Viewport {
-      height: number;
-      width: number;
-    }
-
-    interface RenderContext {
-      canvasContext: CanvasRenderingContext2D;
-      viewport: Viewport;
-    }
-
-    interface RenderTask {
-      promise: Promise<void>;
-    }
-
-    interface Page {
-      getViewport: (config: { scale: number }) => Viewport;
-      render: (context: RenderContext) => RenderTask;
-    }
-
-    interface Document {
-      getPage: (num: number) => Promise<Page>;
-    }
-
-    interface GetDocumentResult {
-      promise: Promise<Document>;
-    }
-
-    interface PdfjsLib {
-      getDocument: (url: string) => GetDocumentResult;
-      GlobalWorkerOptions: {
-        workerSrc: string;
-      };
-    }
-    
-    interface WindowWithPdfjsLib extends Window {
-      pdfjsLib?: PdfjsLib;
-    }
-
     const loadPdfJs = async (): Promise<PdfjsLib> => {
       const win = window as WindowWithPdfjsLib;
       if (win.pdfjsLib) {

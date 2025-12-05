@@ -12,9 +12,21 @@ export default function PdfViewer({ fileUrl, overlays = [] }: Props) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadPdfJs = async () => {
-      if ((window as any).pdfjsLib) {
-        return (window as any).pdfjsLib;
+    interface PdfjsLib {
+      getDocument: (url: string) => { promise: Promise<{ getPage: (num: number) => Promise<{ getViewport: (config: { scale: number }) => { height: number; width: number }; render: (context: { canvasContext: CanvasRenderingContext2D; viewport: { height: number; width: number } }) => { promise: Promise<void> } }> }> };
+      GlobalWorkerOptions: {
+        workerSrc: string;
+      };
+    }
+    
+    interface WindowWithPdfjsLib extends Window {
+      pdfjsLib?: PdfjsLib;
+    }
+
+    const loadPdfJs = async (): Promise<PdfjsLib> => {
+      const win = window as WindowWithPdfjsLib;
+      if (win.pdfjsLib) {
+        return win.pdfjsLib;
       }
       const script = document.createElement("script");
       script.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.js";
@@ -24,7 +36,10 @@ export default function PdfViewer({ fileUrl, overlays = [] }: Props) {
         script.onload = resolve;
         script.onerror = reject;
       });
-      const pdfjs = (window as any).pdfjsLib;
+      if (!win.pdfjsLib) {
+        throw new Error("Failed to load PDF.js library");
+      }
+      const pdfjs: PdfjsLib = win.pdfjsLib;
       pdfjs.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.js";
       return pdfjs;
     };

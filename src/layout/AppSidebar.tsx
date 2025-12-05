@@ -140,6 +140,8 @@ const AppSidebar: React.FC = () => {
                   ? "lg:justify-center"
                   : "lg:justify-start"
               }`}
+              aria-expanded={openSubmenu?.type === menuType && openSubmenu?.index === index}
+              aria-haspopup="true"
             >
               <span
                 className={`menu-item-icon-size  ${
@@ -161,6 +163,7 @@ const AppSidebar: React.FC = () => {
                       ? "rotate-180 text-brand-500"
                       : ""
                   }`}
+                  aria-hidden="true"
                 />
               )}
             </button>
@@ -171,6 +174,7 @@ const AppSidebar: React.FC = () => {
                 className={`menu-item group ${
                   isActive(nav.path) ? "menu-item-active" : "menu-item-inactive"
                 }`}
+                aria-current={isActive(nav.path) ? "page" : undefined}
               >
                 <span
                   className={`menu-item-icon-size ${
@@ -210,6 +214,7 @@ const AppSidebar: React.FC = () => {
                           ? "menu-dropdown-item-active"
                           : "menu-dropdown-item-inactive"
                       }`}
+                      aria-current={isActive(subItem.path) ? "page" : undefined}
                     >
                       {subItem.name}
                       <span className="flex items-center gap-1 ml-auto">

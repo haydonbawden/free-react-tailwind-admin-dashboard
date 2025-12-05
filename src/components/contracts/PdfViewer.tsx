@@ -12,8 +12,35 @@ export default function PdfViewer({ fileUrl, overlays = [] }: Props) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    interface Viewport {
+      height: number;
+      width: number;
+    }
+
+    interface RenderContext {
+      canvasContext: CanvasRenderingContext2D;
+      viewport: Viewport;
+    }
+
+    interface RenderTask {
+      promise: Promise<void>;
+    }
+
+    interface Page {
+      getViewport: (config: { scale: number }) => Viewport;
+      render: (context: RenderContext) => RenderTask;
+    }
+
+    interface Document {
+      getPage: (num: number) => Promise<Page>;
+    }
+
+    interface GetDocumentResult {
+      promise: Promise<Document>;
+    }
+
     interface PdfjsLib {
-      getDocument: (url: string) => { promise: Promise<{ getPage: (num: number) => Promise<{ getViewport: (config: { scale: number }) => { height: number; width: number }; render: (context: { canvasContext: CanvasRenderingContext2D; viewport: { height: number; width: number } }) => { promise: Promise<void> } }> }> };
+      getDocument: (url: string) => GetDocumentResult;
       GlobalWorkerOptions: {
         workerSrc: string;
       };

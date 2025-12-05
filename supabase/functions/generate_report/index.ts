@@ -33,9 +33,15 @@ serve(async (req) => {
       .eq("document_id", document_id)
       .single();
 
+    interface Clause {
+      title: string;
+      risk: string;
+      recommendation?: string;
+    }
+
     const html = `<!doctype html><html><head><meta charset="utf-8" /><style>body{font-family:Arial;padding:24px;}h1{margin-bottom:8px;}table{width:100%;border-collapse:collapse;}td,th{border:1px solid #ddd;padding:8px;}th{background:#f5f5f5;}</style></head><body><h1>Contract Review</h1><p>Overall risk: ${analysis?.risk_rating ?? "Unknown"}</p><p>${analysis?.summary ?? "Pending"}</p><h2>Clauses</h2><table><thead><tr><th>Clause</th><th>Risk</th><th>Recommendation</th></tr></thead><tbody>${(analysis?.clauses || [])
       .map(
-        (clause: any) =>
+        (clause: Clause) =>
           `<tr><td>${clause.title}</td><td>${clause.risk}</td><td>${clause.recommendation ?? ""}</td></tr>`
       )
       .join("")}</tbody></table></body></html>`;
@@ -55,9 +61,10 @@ serve(async (req) => {
     return new Response(JSON.stringify({ signed_url: signed?.signedUrl, path: data?.path }), {
       headers: { "Content-Type": "application/json" },
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+    return new Response(JSON.stringify({ error: errorMessage }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });

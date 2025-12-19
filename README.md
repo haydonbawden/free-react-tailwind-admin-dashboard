@@ -8,7 +8,9 @@ This application demonstrates a complete AI-powered SaaS solution with multi-ten
 
 ## Overview
 
-Contract Reviewer is a production-ready application that combines modern web technologies with AI capabilities to deliver:
+> **⚠️ PRODUCTION READINESS:** This application is currently **NOT production ready**. Please review the [Production Readiness Report](./PRODUCTION_READINESS_REPORT.md) for a comprehensive assessment of what needs to be completed before deploying to production. Key missing items include automated testing, CI/CD pipeline, authentication guards, and comprehensive error handling.
+
+Contract Reviewer is a well-architected application that combines modern web technologies with AI capabilities to deliver:
 
 - **AI-Powered Analysis**: OpenAI integration for intelligent contract review
 - **Multi-Tenant Architecture**: Secure tenant isolation with Supabase RLS
@@ -92,22 +94,32 @@ Ensure you have the following installed:
    npm run preview
    ```
 
-### Environment Setup (Optional)
+### Environment Setup
 
-For full functionality with Supabase and OpenAI, create a `.env` file:
+For full functionality with Supabase and OpenAI, you need to configure environment variables:
 
-```env
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
+1. **Copy the example environment file**:
+   ```bash
+   cp .env.example .env
+   ```
 
-For Supabase Edge Functions:
+2. **Fill in your credentials** in the `.env` file:
+   ```env
+   VITE_SUPABASE_URL=https://your-project.supabase.co
+   VITE_SUPABASE_ANON_KEY=your-anon-key-here
+   ```
 
-```env
-SUPABASE_URL=your_supabase_url
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-OPENAI_API_KEY=your_openai_api_key
-```
+3. **Get your Supabase credentials**:
+   - Create a project at [supabase.com](https://supabase.com)
+   - Go to Project Settings → API
+   - Copy the Project URL and anon/public key
+
+4. **Configure Edge Functions** (for AI features):
+   - Set environment variables in Supabase Dashboard
+   - Go to Edge Functions → Manage secrets
+   - Add: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `OPENAI_API_KEY`
+
+> **Note:** The application can run without environment variables for UI development, but authentication and AI features will not function.
 
 ## Architecture
 
@@ -244,6 +256,13 @@ A major update with comprehensive redesign and modern React patterns.
 - Interactive PDF viewer with overlay highlighting
 - Edge Functions for serverless processing
 - Enhanced navigation with React Router integration
+
+## Documentation
+
+This project includes comprehensive documentation:
+
+- **[Production Readiness Report](./PRODUCTION_READINESS_REPORT.md)**: Detailed assessment of production readiness with actionable recommendations
+- **[UI Audit Report](./UI_AUDIT_REPORT.md)**: Comprehensive accessibility and design system audit
 
 ## Contributing
 

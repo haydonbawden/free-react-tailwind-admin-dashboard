@@ -87,14 +87,15 @@ serve(async (req) => {
     return new Response(JSON.stringify({ status: "ok", analysis }), {
       headers: { "Content-Type": "application/json" },
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
     await supabase
       .from("documents")
       .update({ status: "failed", last_processed_at: new Date().toISOString() })
       .eq("id", req.headers.get("x-document-id") || "");
 
-    return new Response(JSON.stringify({ error: error.message }), {
+    const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+    return new Response(JSON.stringify({ error: errorMessage }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });

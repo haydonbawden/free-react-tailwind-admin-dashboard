@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Clause } from "../../data/mockContracts";
+import type { PdfjsLib, WindowWithPdfjsLib } from "../../types/pdfjs";
 
 interface Props {
   fileUrl?: string;
@@ -12,9 +13,10 @@ export default function PdfViewer({ fileUrl, overlays = [] }: Props) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadPdfJs = async () => {
-      if ((window as any).pdfjsLib) {
-        return (window as any).pdfjsLib;
+    const loadPdfJs = async (): Promise<PdfjsLib> => {
+      const win = window as WindowWithPdfjsLib;
+      if (win.pdfjsLib) {
+        return win.pdfjsLib;
       }
       const script = document.createElement("script");
       script.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.js";
@@ -24,7 +26,10 @@ export default function PdfViewer({ fileUrl, overlays = [] }: Props) {
         script.onload = resolve;
         script.onerror = reject;
       });
-      const pdfjs = (window as any).pdfjsLib;
+      if (!win.pdfjsLib) {
+        throw new Error("Failed to load PDF.js library");
+      }
+      const pdfjs: PdfjsLib = win.pdfjsLib;
       pdfjs.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.js";
       return pdfjs;
     };

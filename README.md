@@ -1,192 +1,272 @@
-# TailAdmin React - Free React Tailwind Admin Dashboard Template
+# Contract Reviewer - AI-Powered Legal Contract Analysis
 
-TailAdmin is a free and open-source admin dashboard template built on **React and Tailwind CSS**, providing developers
-with everything they need to create a comprehensive, data-driven back-end,
-dashboard, or admin panel solution for upcoming web projects.
+Contract Reviewer is an intelligent contract analysis application built on **React 19, TypeScript, and Tailwind CSS**. It leverages AI to automatically review legal documents, identify risk clauses, and provide actionable recommendations.
 
-With TailAdmin, you get access to all the necessary dashboard UI components, elements, and pages required to build a
-feature-rich and complete dashboard or admin panel. Whether you're building dashboard or admin panel for a complex web
-application or a simple website, TailAdmin is the perfect solution to help you get up and running quickly.
+This application demonstrates a complete AI-powered SaaS solution with multi-tenant architecture, secure authentication, and real-time document processing capabilities.
 
-![TailAdmin React.js Dashboard Preview](./banner.png)
+![Contract Reviewer Dashboard Preview](./banner.png)
 
 ## Overview
 
-TailAdmin provides essential UI components and layouts for building feature-rich, data-driven admin dashboards and
-control panels. It's built on:
+Contract Reviewer is a production-ready application that combines modern web technologies with AI capabilities to deliver:
 
-- React 19
-- TypeScript
-- Tailwind CSS
+- **AI-Powered Analysis**: OpenAI integration for intelligent contract review
+- **Multi-Tenant Architecture**: Secure tenant isolation with Supabase RLS
+- **Real-Time Processing**: Edge Functions for document processing
+- **Interactive PDF Viewer**: Visual overlay of identified risk clauses
+- **Comprehensive Dashboard**: Metrics, document management, and analytics
 
-### Quick Links
+### Tech Stack
 
-- [✨ Visit Website](https://tailadmin.com)
-- [📄 Documentation](https://tailadmin.com/docs)
-- [⬇️ Download](https://tailadmin.com/download)
-- [🖌️ Figma Design File (Community Edition)](https://www.figma.com/community/file/1214477970819985778)
-- [⚡ Get PRO Version](https://tailadmin.com/pricing)
+- **Frontend**: React 19, TypeScript, Tailwind CSS v4
+- **Backend**: Supabase (Auth, Storage, Database, Edge Functions)
+- **AI**: OpenAI GPT-4 for contract analysis
+- **PDF Processing**: PDF.js for document rendering
+- **Deployment**: Vite for optimized builds
 
-### Demos
+## Features
 
-- [Free Version](https://free-react-demo.tailadmin.com/)
-- [Pro Version](https://react-demo.tailadmin.com)
+### Core Functionality
 
-### Other Versions
+- **📄 Document Upload & Storage**: Secure document upload with Supabase Storage
+- **🤖 AI Contract Analysis**: Automated clause detection and risk assessment
+- **📊 Risk Dashboard**: Real-time metrics and document status tracking
+- **🔍 Interactive PDF Viewer**: Visual highlighting of risk clauses on documents
+- **📝 Detailed Analysis**: Clause-by-clause breakdown with explanations and recommendations
+- **👥 Multi-Tenant Support**: Secure tenant isolation with Row-Level Security (RLS)
+- **🔐 Authentication**: Secure user authentication via Supabase Auth
+- **⚙️ Settings Management**: User profile and preferences configuration
 
-- [HTML Version](https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template)
-- [Next.js Version](https://github.com/TailAdmin/free-nextjs-admin-dashboard)
-- [Vue.js Version](https://github.com/TailAdmin/vue-tailwind-admin-dashboard)
+### UI Components
+
+- **Responsive Dashboard**: Mobile-first design with adaptive layouts
+- **Dark Mode**: Full dark mode support with theme persistence
+- **Modern UI Components**: Modals, dropdowns, tooltips, badges, and more
+- **Data Visualization**: Charts and metrics for analytics
+- **Form Elements**: Comprehensive form inputs with validation
+- **Document Management**: Table views with sorting and filtering
+- **Empty States**: User-friendly empty state components
 
 ## Installation
 
 ### Prerequisites
 
-To get started with TailAdmin, ensure you have the following prerequisites installed and set up:
+Ensure you have the following installed:
 
-- Node.js 18.x or later (recommended to use Node.js 20.x or later)
+- **Node.js**: Version 18.x or later (20.x+ recommended)
+- **npm** or **yarn**: Package manager
+- **Supabase Account**: For backend services (optional for development with mock data)
+- **OpenAI API Key**: For AI contract analysis (optional for development with mock data)
 
-### Cloning the Repository
+### Quick Start
 
-Clone the repository using the following command:
+1. **Clone the repository**:
 
-```bash
-git clone https://github.com/TailAdmin/free-react-tailwind-admin-dashboard.git
-```
+   ```bash
+   git clone https://github.com/haydonbawden/free-react-tailwind-admin-dashboard.git
+   cd free-react-tailwind-admin-dashboard
+   ```
 
-> Windows Users: place the repository near the root of your drive if you face issues while cloning.
-
-1. Install dependencies:
+2. **Install dependencies**:
 
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
-   > Use the `--legacy-peer-deps` flag, if you face issues while installing.
+3. **Start the development server**:
 
-2. Start the development server:
    ```bash
    npm run dev
-   # or
-   yarn dev
    ```
 
-## Components
+   The application will be available at `http://localhost:5173`
 
-TailAdmin is a pre-designed starting point for building a web-based dashboard using React.js and Tailwind CSS. The
-template includes:
+4. **Build for production**:
 
-- Sophisticated and accessible sidebar
-- Data visualization components
-- Prebuilt profile management and 404 page
-- Tables and Charts(Line and Bar)
-- Authentication forms and input elements
-- Alerts, Dropdowns, Modals, Buttons and more
-- Can't forget Dark Mode 🕶️
+   ```bash
+   npm run build
+   ```
 
-All components are built with React and styled using Tailwind CSS for easy customization.
+5. **Preview production build**:
+   ```bash
+   npm run preview
+   ```
 
-## Feature Comparison
+### Environment Setup (Optional)
 
-### Free Version
+For full functionality with Supabase and OpenAI, create a `.env` file:
 
-- 1 Unique Dashboard
-- 30+ dashboard components
-- 50+ UI elements
-- Basic Figma design files
-- Community support
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-### Pro Version
+For Supabase Edge Functions:
 
-- 7 Unique Dashboards: Analytics, Ecommerce, Marketing, CRM, SaaS, Stocks, Logistics (more coming soon)
-- 500+ dashboard components and UI elements
-- Complete Figma design file
-- Email support
+```env
+SUPABASE_URL=your_supabase_url
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+OPENAI_API_KEY=your_openai_api_key
+```
 
-To learn more about pro version features and pricing, visit our [pricing page](https://tailadmin.com/pricing).
+## Architecture
+
+### Project Structure
+
+```
+src/
+├── components/       # Reusable UI components
+│   ├── auth/        # Authentication forms
+│   ├── contracts/   # Contract-specific components
+│   ├── ui/          # Generic UI components
+│   ├── form/        # Form elements
+│   └── ...
+├── pages/           # Page components
+│   ├── Dashboard/   # Dashboard views
+│   ├── Documents/   # Document management
+│   ├── AuthPages/   # Sign in/up pages
+│   └── Settings/    # Settings pages
+├── hooks/           # Custom React hooks
+├── context/         # React context providers
+├── data/            # Mock data and types
+└── layout/          # Layout components
+
+supabase/
+└── functions/       # Edge Functions
+    ├── process_document/    # AI document processing
+    ├── generate_report/     # PDF report generation
+    └── _shared/            # Shared utilities
+```
+
+### Key Technologies
+
+- **React 19**: Latest React with concurrent features
+- **TypeScript**: Type-safe development
+- **Tailwind CSS v4**: Utility-first styling with latest features
+- **React Router v7**: Client-side routing
+- **Supabase**: Backend-as-a-Service
+  - Authentication
+  - PostgreSQL Database with RLS
+  - Storage for documents
+  - Edge Functions for serverless compute
+- **OpenAI GPT-4**: AI contract analysis
+- **PDF.js**: Client-side PDF rendering
+- **Vite**: Fast build tool and dev server
+
+### Supabase Edge Functions
+
+The application includes serverless Edge Functions for:
+
+1. **process_document**: Analyzes uploaded contracts using OpenAI
+2. **generate_report**: Creates PDF reports from analysis results
+3. **analysis**: Additional analysis utilities
+
+These functions use:
+- OpenAI API for intelligent contract review
+- Chromium for PDF generation
+- Supabase SDK for data persistence
+
+## Development Scripts
+
+```bash
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+# Run ESLint
+npm run lint
+```
+
+## How It Works
+
+### Document Analysis Flow
+
+1. **Upload**: User uploads a contract document (PDF/DOCX)
+2. **Storage**: Document is stored securely in Supabase Storage
+3. **Processing**: Edge Function triggers AI analysis
+4. **AI Analysis**: OpenAI GPT-4 analyzes the contract:
+   - Identifies clauses
+   - Assesses risk levels (High/Medium/Low)
+   - Provides explanations and recommendations
+   - Generates bounding boxes for visual overlays
+5. **Storage**: Analysis results stored in PostgreSQL
+6. **Display**: User views results with interactive PDF overlay
+7. **Report**: Optional PDF report generation
+
+### Multi-Tenant Security
+
+- Row-Level Security (RLS) policies ensure data isolation
+- Tenant ID attached to all user sessions
+- All queries automatically filtered by tenant
+- Secure authentication via Supabase Auth
 
 ## Changelog
+
+### Version 2.0.2 - Bug Fixes [December 2025]
+
+#### Security Updates
+- Fixed 9 security vulnerabilities in dependencies
+- Updated Babel, ESLint, esbuild, and React Router packages
+- All dependencies now secure and up-to-date
+
+#### Code Quality Improvements
+- Fixed TypeScript `any` type usage across codebase
+- Improved type safety in PDF.js integration
+- Enhanced error handling in Edge Functions
+- Fixed ESLint errors and improved code quality
+- Build now completes without warnings or errors
 
 ### Version 2.0.2 - [March 25, 2025]
 
 - Upgraded to React 19
-- Included overrides for packages to prevent peer dependency errors.
+- Included overrides for packages to prevent peer dependency errors
 - Migrated from react-flatpickr to flatpickr package for React 19 support
 
 ### Version 2.0.1 - [February 27, 2025]
 
-#### Update Overview
-
-- Upgraded to Tailwind CSS v4 for better performance and efficiency.
-- Updated class usage to match the latest syntax and features.
-- Replaced deprecated class and optimized styles.
-
-#### Next Steps
-
-- Run npm install or yarn install to update dependencies.
-- Check for any style changes or compatibility issues.
-- Refer to the Tailwind CSS v4 [Migration Guide](https://tailwindcss.com/docs/upgrade-guide) on this release. if needed.
-- This update keeps the project up to date with the latest Tailwind improvements. 🚀
+- Upgraded to Tailwind CSS v4 for better performance and efficiency
+- Updated class usage to match the latest syntax and features
+- Replaced deprecated class and optimized styles
 
 ### Version 2.0.0 - [February 2025]
 
-A major update with comprehensive redesign and modern React patterns implementation.
+A major update with comprehensive redesign and modern React patterns.
 
 #### Major Improvements
-
 - Complete UI redesign with modern React patterns
-- New features: collapsible sidebar, chat, and calendar
-- Improved performance and accessibility
-- Updated data visualization using ApexCharts
-
-#### Key Features
-
-- Redesigned dashboards (Ecommerce, Analytics, Marketing, CRM)
+- AI-powered contract analysis integration
+- Multi-tenant architecture with Supabase
+- Interactive PDF viewer with overlay highlighting
+- Edge Functions for serverless processing
 - Enhanced navigation with React Router integration
-- Advanced tables with sorting and filtering
-- Calendar with drag-and-drop support
-- New UI components and improved existing ones
 
-#### Breaking Changes
+## Contributing
 
-- Updated sidebar component API
-- Migrated charts to ApexCharts
-- Revised authentication system
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-[Read more](https://tailadmin.com/docs/update-logs/react) on this release.
-
-### Version 1.3.7 - [June 20, 2024]
-
-#### Enhancements
-
-1. Remove Repetition of DefaultLayout in every Pages
-2. Add ClickOutside Component for reduce repeated functionality in Header Message, Notification and User Dropdowns.
-
-### Version 1.3.6 - [Jan 31, 2024]
-
-#### Enhancements
-
-1. Integrate flatpickr in [Date Picker/Form Elements]
-2. Change color after select an option [Select Element/Form Elements].
-3. Make it functional [Multiselect Dropdown/Form Elements].
-4. Make best value editable [Pricing Table One/Pricing Table].
-5. Rearrange Folder structure.
-
-### Version 1.2.0 - [Apr 28, 2023]
-
-- Add Typescript in TailAdmin React.
-
-### Version 1.0.0 - Initial Release - [Mar 13, 2023]
-
-- Initial release of TailAdmin React.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
-TailAdmin React.js Free Version is released under the MIT License.
+This project is released under the MIT License.
+
+## Acknowledgments
+
+- Built with [React](https://react.dev/)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
+- Backend powered by [Supabase](https://supabase.com/)
+- AI analysis by [OpenAI](https://openai.com/)
+- PDF rendering by [PDF.js](https://mozilla.github.io/pdf.js/)
 
 ## Support
 
-If you find this project helpful, please consider giving it a star on GitHub. Your support helps us continue developing
-and maintaining this template.
+If you find this project helpful, please consider giving it a star ⭐ on GitHub!

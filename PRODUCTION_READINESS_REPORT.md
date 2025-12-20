@@ -362,8 +362,8 @@ The Contract Reviewer application is a well-architected React-based SaaS applica
 
 | Risk Area | Current Level | Mitigation Required |
 |-----------|--------------|---------------------|
-| Security | 🔴 High | Add auth guards, security headers, rate limiting |
-| Reliability | 🔴 High | Add tests, error boundaries, monitoring |
+| Security | 🟡 Medium (Improved) | ✅ Auth guards implemented. Still need: security headers, rate limiting |
+| Reliability | 🟡 Medium (Improved) | ✅ Tests infrastructure and error boundaries added. Still need: expand coverage, monitoring |
 | Accessibility | 🟡 Medium | Fix WCAG issues from UI audit |
 | Performance | 🟢 Low | Build is optimized, consider CDN |
 | Maintainability | 🟢 Low | Code is well-structured |

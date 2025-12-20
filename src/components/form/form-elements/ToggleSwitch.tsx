@@ -1,9 +1,11 @@
 import ComponentCard from "../../common/ComponentCard";
 import Switch from "../switch/Switch";
+import { useState } from "react";
 
 export default function ToggleSwitch() {
+  const [status, setStatus] = useState("ON");
   const handleSwitchChange = (checked: boolean) => {
-    console.log("Switch is now:", checked ? "ON" : "OFF");
+    setStatus(checked ? "ON" : "OFF");
   };
   return (
     <ComponentCard title="Toggle switch input">
@@ -35,6 +37,9 @@ export default function ToggleSwitch() {
         />
         <Switch label="Disabled" disabled={true} color="gray" />
       </div>
+      <p className="mt-3 text-xs text-gray-500 dark:text-gray-400" aria-live="polite">
+        Current status: {status}
+      </p>
     </ComponentCard>
   );
 }

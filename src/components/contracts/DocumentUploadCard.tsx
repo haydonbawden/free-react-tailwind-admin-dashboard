@@ -70,18 +70,29 @@ export default function DocumentUploadCard({ accessToken, tenantId, onUploadComp
         }`}
       >
         <input {...getInputProps()} />
-        <p className="text-sm text-gray-700 dark:text-gray-200">{helperText}</p>
+        <p className="text-sm text-gray-700 dark:text-gray-200" aria-live="polite">
+          {helperText}
+        </p>
         <p className="text-xs text-gray-500 dark:text-gray-400">We send to Supabase Storage, then trigger Edge Functions.</p>
       </div>
       <div className="flex flex-col gap-3 mt-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="text-xs text-gray-500 dark:text-gray-400">
           Recent uploads: {mockDocuments.slice(0, 2).map((d) => d.name).join(", ")}
         </div>
-        <Button size="sm" onClick={handleUpload} disabled={!file || isUploading}>
+        <Button size="sm" onClick={handleUpload} disabled={!file || isUploading} aria-live="polite">
           {isUploading ? "Uploading..." : "Upload & Analyze"}
         </Button>
       </div>
-      {error && <p className="mt-2 text-sm text-error-500">{error}</p>}
+      {isUploading && (
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300" role="status" aria-live="polite">
+          Uploading to encrypted storage...
+        </p>
+      )}
+      {error && (
+        <p className="mt-2 text-sm text-error-500" role="alert" aria-live="assertive">
+          {error}
+        </p>
+      )}
     </div>
   );
 }

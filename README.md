@@ -8,7 +8,7 @@ This application demonstrates a complete AI-powered SaaS solution with multi-ten
 
 ## Overview
 
-> **⚠️ PRODUCTION READINESS:** This application is currently **NOT production ready**. Please review the [Production Readiness Report](./PRODUCTION_READINESS_REPORT.md) for a comprehensive assessment of what needs to be completed before deploying to production. Key missing items include automated testing, CI/CD pipeline, authentication guards, and comprehensive error handling.
+> **⚠️ PRODUCTION READINESS:** This application is currently **NOT production ready**. Please review the [Production Readiness Report](./PRODUCTION_READINESS_REPORT.md) for a comprehensive assessment of what needs to be completed before deploying to production. Baseline testing, CI, error boundaries, and authentication guards have been added, but coverage is limited and additional hardening is required before launch.
 
 Contract Reviewer is a well-architected application that combines modern web technologies with AI capabilities to deliver:
 
@@ -93,6 +93,12 @@ Ensure you have the following installed:
    ```bash
    npm run preview
    ```
+
+### Testing & Quality Checks
+
+- **Run tests**: `npm test`
+- **Watch mode**: `npm run test:watch`
+- **Lint**: `npm run lint`
 
 ### Environment Setup
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useModal } from "../../hooks/useModal";
 import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
@@ -6,9 +7,9 @@ import Label from "../form/Label";
 
 export default function UserInfoCard() {
   const { isOpen, openModal, closeModal } = useModal();
+  const [saveMessage, setSaveMessage] = useState<string | null>(null);
   const handleSave = () => {
-    // Handle save logic here
-    console.log("Saving changes...");
+    setSaveMessage("Profile details saved");
     closeModal();
   };
   return (
@@ -179,6 +180,11 @@ export default function UserInfoCard() {
           </form>
         </div>
       </Modal>
+      {saveMessage && (
+        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400" aria-live="polite">
+          {saveMessage}
+        </p>
+      )}
     </div>
   );
 }

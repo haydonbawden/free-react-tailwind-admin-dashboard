@@ -8,6 +8,7 @@ import Home from "./pages/Dashboard/Home";
 import Upload from "./pages/Documents/Upload";
 import DocumentViewerPage from "./pages/Documents/DocumentViewerPage";
 import SettingsPage from "./pages/Settings/SettingsPage";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 export default function App() {
   return (
@@ -16,11 +17,13 @@ export default function App() {
         <ScrollToTop />
         <Routes>
           {/* Dashboard Layout */}
-          <Route element={<AppLayout />}>
-            <Route index path="/" element={<Home />} />
-            <Route path="/documents/upload" element={<Upload />} />
-            <Route path="/documents/:id" element={<DocumentViewerPage />} />
-            <Route path="/settings" element={<SettingsPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route element={<AppLayout />}>
+              <Route index path="/" element={<Home />} />
+              <Route path="/documents/upload" element={<Upload />} />
+              <Route path="/documents/:id" element={<DocumentViewerPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
+            </Route>
           </Route>
 
           {/* Auth Layout */}

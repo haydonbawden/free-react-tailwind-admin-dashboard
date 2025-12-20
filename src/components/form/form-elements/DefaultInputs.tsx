@@ -8,14 +8,14 @@ import DatePicker from "../date-picker.tsx";
 
 export default function DefaultInputs() {
   const [showPassword, setShowPassword] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("Select an option");
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | undefined>(undefined);
   const options = [
     { value: "marketing", label: "Marketing" },
     { value: "template", label: "Template" },
     { value: "development", label: "Development" },
   ];
-  const handleSelectChange = (value: string) => {
-    console.log("Selected value:", value);
-  };
 
   return (
     <ComponentCard title="Default Inputs">
@@ -33,9 +33,12 @@ export default function DefaultInputs() {
           <Select
             options={options}
             placeholder="Select an option"
-            onChange={handleSelectChange}
+            onChange={(value) => setSelectedOption(options.find((o) => o.value === value)?.label ?? value)}
             className="dark:bg-dark-900"
           />
+          <p className="sr-only" aria-live="polite">
+            Selected option: {selectedOption}
+          </p>
         </div>
         <div>
           <Label>Password Input</Label>
@@ -62,11 +65,15 @@ export default function DefaultInputs() {
             id="date-picker"
             label="Date Picker Input"
             placeholder="Select a date"
-            onChange={(dates, currentDateString) => {
-              // Handle your logic
-              console.log({ dates, currentDateString });
+            onChange={(_, currentDateString) => {
+              setSelectedDate(currentDateString);
             }}
           />
+          {selectedDate && (
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400" aria-live="polite">
+              Selected date: {selectedDate}
+            </p>
+          )}
         </div>
 
         <div>
@@ -76,12 +83,18 @@ export default function DefaultInputs() {
               type="time"
               id="tm"
               name="tm"
-              onChange={(e) => console.log(e.target.value)}
+              value={selectedTime}
+              onChange={(e) => setSelectedTime(e.target.value)}
             />
             <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
               <TimeIcon className="size-6" />
             </span>
           </div>
+          {selectedTime && (
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400" aria-live="polite">
+              Selected time: {selectedTime}
+            </p>
+          )}
         </div>
         <div>
           <Label htmlFor="tm">Input with Payment</Label>

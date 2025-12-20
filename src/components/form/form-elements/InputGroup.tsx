@@ -3,8 +3,10 @@ import Label from "../Label";
 import Input from "../input/InputField";
 import { EnvelopeIcon } from "../../../icons";
 import PhoneInput from "../group-input/PhoneInput";
+import { useState } from "react";
 
 export default function InputGroup() {
+  const [phoneNumber, setPhoneNumber] = useState("");
   const countries = [
     { code: "US", label: "+1" },
     { code: "GB", label: "+44" },
@@ -12,7 +14,7 @@ export default function InputGroup() {
     { code: "AU", label: "+61" },
   ];
   const handlePhoneNumberChange = (phoneNumber: string) => {
-    console.log("Updated phone number:", phoneNumber);
+    setPhoneNumber(phoneNumber);
   };
   return (
     <ComponentCard title="Input Group">
@@ -48,6 +50,9 @@ export default function InputGroup() {
             onChange={handlePhoneNumberChange}
           />
         </div>
+        <p className="sr-only" aria-live="polite">
+          Current phone number: {phoneNumber || "None"}
+        </p>
       </div>
     </ComponentCard>
   );

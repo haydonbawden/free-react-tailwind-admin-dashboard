@@ -10,9 +10,9 @@
 
 **Is this app production ready?**
 
-❌ **NO** - Significant development work is required before production deployment.
+❌ **NO** - Core safeguards are now in place, but further hardening and coverage are required before production deployment.
 
-**Estimated time to production ready:** 6-9 weeks
+**Estimated time to production ready:** 3-5 weeks
 
 ---
 
@@ -39,18 +39,26 @@ This assessment includes:
    - Improved environment setup instructions
    - Links to all assessment reports
 
+5. ✅ **Baseline Testing & Tooling** (Vitest + React Testing Library)
+   - Added unit test infrastructure with examples for routing and error handling
+   - Added npm scripts for running and watching tests
+
+6. ✅ **CI Pipeline** (`.github/workflows/ci.yml`)
+   - Lints, tests, and builds on push/PR to main and develop
+   - Ready to extend with deployment steps
+
 ---
 
 ## Critical Findings (Must Fix)
 
-### 🔴 Top 6 Blockers
+### 🔴 Top 6 Blockers (Updated Status)
 
-1. **NO AUTOMATED TESTS** - Zero test coverage (2-3 weeks effort)
-2. **NO CI/CD PIPELINE** - No automated deployment or testing (1-2 days effort)
-3. **NO AUTHENTICATION GUARDS** - Unprotected routes (4-6 hours effort)
-4. **NO ENVIRONMENT CONFIG** - Missing `.env.example` ✅ **FIXED**
-5. **NO ERROR BOUNDARIES** - App crashes on errors (4-6 hours effort)
-6. **13 DEBUG console.log STATEMENTS** - Should be removed (1-2 hours effort)
+1. **LIMITED AUTOMATED TEST COVERAGE** - Infrastructure added (Vitest + RTL), but critical paths still lack tests; target 60%+ coverage (1-2 weeks effort)
+2. **NO CD/DEPLOYMENT PIPELINE** - CI now runs lint/test/build; automated deploys to staging/production still required (1-2 days effort)
+3. **AUTHENTICATION GUARDS IMPLEMENTED** - Protected routes now enforce session checks; continue to verify session refresh/expiry flows (follow-up: 2-3 hours)
+4. **ENVIRONMENT CONFIG** - `.env.example` and `.gitignore` already in place
+5. **GLOBAL ERROR BOUNDARY ADDED** - Root wrapped with fallback UI; next step is wiring to observability (2-3 hours)
+6. **DEBUG LOGS REMOVED** - 13 console logs replaced with stateful UI feedback; consider adding ESLint `no-console` rule (30 minutes)
 
 ---
 
@@ -100,11 +108,11 @@ This assessment includes:
 ## Recommended Action Plan
 
 ### Week 1-2: Foundation
-- [ ] Set up testing infrastructure (Vitest + React Testing Library)
-- [ ] Add authentication guards to protected routes
-- [ ] Remove all console.log statements
-- [ ] Implement React Error Boundary
-- [ ] Set up GitHub Actions CI/CD pipeline
+- [x] Set up testing infrastructure (Vitest + React Testing Library)
+- [x] Add authentication guards to protected routes
+- [x] Remove all console.log statements
+- [x] Implement React Error Boundary
+- [x] Set up GitHub Actions CI pipeline (CD still pending)
 
 ### Week 3-4: Testing
 - [ ] Write unit tests for critical functions

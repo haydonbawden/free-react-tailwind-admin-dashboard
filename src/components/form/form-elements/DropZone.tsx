@@ -1,11 +1,13 @@
 import ComponentCard from "../../common/ComponentCard";
 import { useDropzone } from "react-dropzone";
 // import Dropzone from "react-dropzone";
+import { useState } from "react";
 
 const DropzoneComponent: React.FC = () => {
+  const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
   const onDrop = (acceptedFiles: File[]) => {
-    console.log("Files dropped:", acceptedFiles);
-    // Handle file uploads here
+    const fileNames = acceptedFiles.map((file) => file.name);
+    setUploadedFiles(fileNames);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -69,6 +71,13 @@ const DropzoneComponent: React.FC = () => {
           </div>
         </form>
       </div>
+      {uploadedFiles.length > 0 && (
+        <ul className="mt-3 text-xs text-gray-600 list-disc list-inside dark:text-gray-400" aria-live="polite">
+          {uploadedFiles.map((file) => (
+            <li key={file}>{file}</li>
+          ))}
+        </ul>
+      )}
     </ComponentCard>
   );
 };

@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "../../icons";
-import { useSupabaseAuth } from "../../hooks/useSupabaseAuth";
+import { useAuth } from "../../context/AuthContext";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
 import Checkbox from "../form/input/Checkbox";
@@ -13,15 +13,15 @@ export default function SignUpForm() {
   const [password, setPassword] = useState("SecurePass!23");
   const [tenant, setTenant] = useState("Acme Legal");
   const navigate = useNavigate();
-  const { signUp, loading, error } = useSupabaseAuth();
+  const { signUp, loading, error } = useAuth();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       await signUp(email, password, tenant);
       navigate("/");
-    } catch (err) {
-      console.error(err);
+    } catch {
+      /* error state handled by context */
     }
   };
 

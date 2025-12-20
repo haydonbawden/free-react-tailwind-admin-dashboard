@@ -2,7 +2,8 @@ import DocumentUploadCard from "../../components/contracts/DocumentUploadCard";
 import DocumentTable from "../../components/contracts/DocumentTable";
 import PageMeta from "../../components/common/PageMeta";
 import { mockAnalysis, mockDocuments } from "../../data/mockContracts";
-import { useSupabaseAuth } from "../../hooks/useSupabaseAuth";
+import { useAuth } from "../../context/AuthContext";
+import { useState } from "react";
 
 const metrics = [
   { label: "Active tenants", value: "18", hint: "enforced via RLS" },
@@ -12,7 +13,8 @@ const metrics = [
 ];
 
 export default function Home() {
-  const { session } = useSupabaseAuth();
+  const [recentUploadPath, setRecentUploadPath] = useState<string | null>(null);
+  const { session } = useAuth();
 
   return (
     <>
@@ -38,8 +40,13 @@ export default function Home() {
           <DocumentUploadCard
             accessToken={session?.access_token}
             tenantId={session?.user.tenant_id}
-            onUploadComplete={(path) => console.log("Uploaded to", path)}
+            onUploadComplete={(path) => setRecentUploadPath(path)}
           />
+          {recentUploadPath && (
+            <p className="text-sm text-gray-600 dark:text-gray-300" aria-live="polite">
+              Recent upload stored at: {recentUploadPath}
+            </p>
+          )}
 
           <DocumentTable documents={mockDocuments} />
         </div>

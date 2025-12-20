@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "../../icons";
-import { useSupabaseAuth } from "../../hooks/useSupabaseAuth";
+import { useAuth } from "../../context/AuthContext";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
 import Checkbox from "../form/input/Checkbox";
@@ -12,15 +12,15 @@ export default function SignInForm() {
   const [email, setEmail] = useState("demo@example.com");
   const [password, setPassword] = useState("demo-password");
   const navigate = useNavigate();
-  const { signIn, loading, error } = useSupabaseAuth();
+  const { signIn, loading, error } = useAuth();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       await signIn(email, password);
       navigate("/");
-    } catch (err) {
-      console.error(err);
+    } catch {
+      /* error state handled by context */
     }
   };
 

@@ -1,9 +1,11 @@
 import DocumentUploadCard from "../../components/contracts/DocumentUploadCard";
 import PageMeta from "../../components/common/PageMeta";
-import { useSupabaseAuth } from "../../hooks/useSupabaseAuth";
+import { useAuth } from "../../context/AuthContext";
+import { useState } from "react";
 
 export default function Upload() {
-  const { session } = useSupabaseAuth();
+  const [lastUploadedPath, setLastUploadedPath] = useState<string | null>(null);
+  const { session } = useAuth();
 
   return (
     <>
@@ -19,8 +21,13 @@ export default function Upload() {
         <DocumentUploadCard
           accessToken={session?.access_token}
           tenantId={session?.user.tenant_id}
-          onUploadComplete={(path) => console.log("uploaded", path)}
+          onUploadComplete={(path) => setLastUploadedPath(path)}
         />
+        {lastUploadedPath && (
+          <p className="text-sm text-gray-600 dark:text-gray-300" aria-live="polite">
+            Last upload saved to: {lastUploadedPath}
+          </p>
+        )}
       </div>
     </>
   );

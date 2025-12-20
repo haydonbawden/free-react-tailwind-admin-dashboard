@@ -5,7 +5,7 @@ const LOCAL_KEY = "saas-session";
 
 export function useSupabaseAuth() {
   const [session, setSession] = useState<TenantAwareSession | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -13,6 +13,7 @@ export function useSupabaseAuth() {
     if (saved) {
       setSession(JSON.parse(saved));
     }
+    setLoading(false);
   }, []);
 
   const persist = (value: TenantAwareSession | null) => {
